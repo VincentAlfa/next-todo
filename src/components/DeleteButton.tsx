@@ -4,13 +4,14 @@ import React from 'react';
 import { Button } from './ui/button';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { Trash2 } from 'lucide-react';
 
 type buttonProps = {
   id: number;
   className?: string | undefined;
 };
 
-export default function DeleteButton ({ id, className }: buttonProps) {
+export default function DeleteButton({ id, className }: buttonProps) {
   const router = useRouter();
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -20,9 +21,8 @@ export default function DeleteButton ({ id, className }: buttonProps) {
   };
 
   return (
-    <Button className={className} variant={'destructive'} onClick={handleClick}>
-      Delete
+    <Button className={className} variant={'ghost'} onClick={handleClick}>
+      <Trash2 />
     </Button>
   );
-};
-
+}

@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { PencilLine } from 'lucide-react';
 
 type DialogEditProps = {
   id?: number;
@@ -39,7 +40,9 @@ export default function UpdateButton({ id, buttonText, headerText, className }: 
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className={className}>{buttonText}</Button>
+          <Button variant={'ghost'}>
+            <PencilLine />
+          </Button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-[425px]'>
           <DialogHeader>
@@ -48,7 +51,7 @@ export default function UpdateButton({ id, buttonText, headerText, className }: 
           <form className='grid gap-4 py-4' onSubmit={handleSubmit}>
             <div className='grid grid-cols-4 items-center gap-4'>
               <Label htmlFor='title' className='text-right'>
-                Title
+                Todo
               </Label>
               <Input ref={todoRef} id='title' className='col-span-3' required />
             </div>
