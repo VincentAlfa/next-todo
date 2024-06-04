@@ -4,6 +4,7 @@ import CheckboxButton from './CheckboxButton';
 import DeleteButton from './DeleteButton';
 import UpdateButton from './UpdateButton';
 import { Todo } from '@/lib/types';
+import { cn } from '@/lib/utils';
 
 type TodoListProps = {
   className?: string | undefined;
@@ -22,7 +23,9 @@ export default function TodoList({ className, datas }: TodoListProps) {
           return (
             <div key={post.id} className='flex bg-gray-300 p-3 justify-center items-center gap-5'>
               <CheckboxButton data={post} onCheked={addOptimisticTodo} />
-              <h1>{post.todo}</h1>
+              <h1 className={cn('no-underline', { 'line-through': post.completed === true })}>
+                {post.todo}
+              </h1>
               <div className='flex gap-0 p-0 m-0'>
                 <UpdateButton headerText='Edit Todo' id={post.id} todo={post.todo} />
                 <DeleteButton id={post.id} />
