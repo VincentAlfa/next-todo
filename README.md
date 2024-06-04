@@ -4,8 +4,8 @@
 A To-do List web application with CRUD (Create, Read, Update, Delete) functionality using Next.js
 
 ## Application Link
-Repository: https://github.com/VincentAlfa/next-todo
-Deployed App: https://next-todo-bice.vercel.app/
+- Repository: https://github.com/VincentAlfa/next-todo
+- Deployed App: https://next-todo-bice.vercel.app/
 
 ## How to Run the Project Locally
 
