@@ -7,8 +7,6 @@ A To-do List web application with CRUD (Create, Read, Update, Delete) functional
 
 Follow these steps to set up and run the project on your local machine:
 
-## 1. Clone the Repository
-
 First, you need to clone the repository to your local machine. Open your terminal and run the following command:
 
 ```bash
