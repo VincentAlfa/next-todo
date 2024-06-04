@@ -11,3 +11,9 @@ export type paramsProps = {
     id : string
   }
 }
+
+export type Todo = {
+  id: number;
+  todo: string;
+  completed: boolean;
+};

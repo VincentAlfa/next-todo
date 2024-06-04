@@ -13,10 +13,12 @@ export default function TodoCard({className} : {className?: string}) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
+
     const todoInput = inputTodoRef.current?.value;
     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
       todo: todoInput,
     });
+    
     router.refresh()
     setIsLoading(false)
   };

@@ -1,29 +1,30 @@
 'use client';
-import React from 'react';
+import React, { useOptimistic } from 'react';
 import CheckboxButton from './CheckboxButton';
 import DeleteButton from './DeleteButton';
 import UpdateButton from './UpdateButton';
+import { Todo } from '@/lib/types';
 
 type TodoListProps = {
   className?: string | undefined;
-  datas: {
-    id: number;
-    todo: string;
-    completed: boolean;
-  }[];
+  datas: Todo[];
 };
 
 export default function TodoList({ className, datas }: TodoListProps) {
+  const [optimisticTodo, addOptimisticTodo] = useOptimistic(datas, (state, newTodo: Todo) => [
+    ...state,
+    newTodo,
+  ]);
   return (
     <>
       <div className={className}>
-        {datas.map((post) => {
+        {optimisticTodo.map((post) => {
           return (
             <div key={post.id} className='flex bg-gray-300 p-3 justify-center items-center gap-5'>
-              <CheckboxButton id={post.id} completed={post.completed} />
+              <CheckboxButton data={post} onCheked={addOptimisticTodo} />
               <h1>{post.todo}</h1>
               <div className='flex gap-0 p-0 m-0'>
-                <UpdateButton buttonText='edit' headerText='Edit Todo' id={post.id} />
+                <UpdateButton headerText='Edit Todo' id={post.id} todo={post.todo} />
                 <DeleteButton id={post.id} />
               </div>
             </div>

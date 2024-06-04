@@ -2,7 +2,6 @@ import { paramsProps, responseData } from '@/lib/types';
 import { post, PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 const prisma = new PrismaClient();
-export const dynamic = 'force dynamic';
 
 export async function GET(request: NextRequest, {params}: paramsProps) {
   const getDataById = await prisma.post.findUnique({

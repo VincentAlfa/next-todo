@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { use, useRef, useState } from 'react';
 import {
   Dialog,
   DialogClose,
@@ -15,33 +15,37 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { PencilLine } from 'lucide-react';
+import { LoaderCircle, PencilLine } from 'lucide-react';
 
 type DialogEditProps = {
   id?: number;
-  buttonText: string;
+  todo: string;
   headerText: string;
   className?: string;
 };
 
-export default function UpdateButton({ id, buttonText, headerText, className }: DialogEditProps) {
+export default function UpdateButton({ id, todo, headerText }: DialogEditProps) {
+  const [loading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const todoRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const todoValue = todoRef.current?.value;
+
+    setIsLoading(true);
     await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${id}`, {
       todo: todoValue,
     });
     router.refresh();
+    setIsLoading(false);
   };
   return (
     <>
       <Dialog>
         <DialogTrigger asChild>
           <Button variant={'ghost'}>
-            <PencilLine />
+            {loading ? <LoaderCircle className='animate-spin' /> : <PencilLine />}
           </Button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-[425px]'>
@@ -53,7 +57,7 @@ export default function UpdateButton({ id, buttonText, headerText, className }: 
               <Label htmlFor='title' className='text-right'>
                 Todo
               </Label>
-              <Input ref={todoRef} id='title' className='col-span-3' required />
+              <Input defaultValue={todo} ref={todoRef} id='title' className='col-span-3' required />
             </div>
             <DialogFooter>
               <DialogClose asChild>
